@@ -28,7 +28,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 
-class VideosRepository (val database: VideosDatabase) {
+class VideosRepository (private val database: VideosDatabase) {
 
 
     val videos: LiveData<List<Video>> = Transformations.map(database.videoDao.getVideos()){

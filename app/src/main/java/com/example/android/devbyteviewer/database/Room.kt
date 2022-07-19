@@ -42,17 +42,18 @@ abstract class VideosDatabase: RoomDatabase() {
 
     abstract val videoDao: VideoDao
 
-    private lateinit var INSTANCE: VideosDatabase
+}
+
+private lateinit var INSTANCE: VideosDatabase
 
 
-    fun getDatabase(context: Context): VideosDatabase {
-        synchronized(VideosDatabase::class.java) { // make sure this is thread safe
-            if (!::INSTANCE.isInitialized) {
-                INSTANCE = Room.databaseBuilder(context.applicationContext,
-                    VideosDatabase::class.java, "videos").build()
-            }
+fun getDatabase(context: Context): VideosDatabase {
+    synchronized(VideosDatabase::class.java) { // make sure this is thread safe
+        if (!::INSTANCE.isInitialized) {
+            INSTANCE = Room.databaseBuilder(context.applicationContext,
+                VideosDatabase::class.java, "videos").build()
         }
-
-        return INSTANCE
     }
+
+    return INSTANCE
 }
